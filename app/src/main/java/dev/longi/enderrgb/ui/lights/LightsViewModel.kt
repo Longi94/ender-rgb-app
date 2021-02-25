@@ -28,6 +28,13 @@ class LightsViewModel(app: Application) : AndroidViewModel(app) {
     private val _effects = MutableLiveData<List<String>>()
     val effects: LiveData<List<String>> = _effects
 
+    fun setColor(color: Int) {
+        val b = color and 255
+        val g = (color shr 8) and 255
+        val r = (color shr 16) and 255
+        setColor(r, g, b)
+    }
+
     fun setColor(r: Int, g: Int, b: Int) {
         val body = JSONObject()
         body.put("r", r)
@@ -102,15 +109,16 @@ class LightsViewModel(app: Application) : AndroidViewModel(app) {
 
     fun setEffect(effectName: String) {
         try {
-            val request = JsonObjectRequest(Request.Method.POST, url("light/effect/$effectName"), null,
-                { response ->
-                    Log.i(TAG, "setEffect: Request successful: $response")
-                },
-                { error ->
-                    _error.value = error.message
-                    Log.e(TAG, "setEffect: Failed to send request", error)
-                }
-            )
+            val request =
+                JsonObjectRequest(Request.Method.POST, url("light/effect/$effectName"), null,
+                    { response ->
+                        Log.i(TAG, "setEffect: Request successful: $response")
+                    },
+                    { error ->
+                        _error.value = error.message
+                        Log.e(TAG, "setEffect: Failed to send request", error)
+                    }
+                )
 
             VolleyQueue.getInstance(getApplication()).addToRequestQueue(request)
         } catch (e: Exception) {

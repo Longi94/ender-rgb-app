@@ -1,17 +1,17 @@
 package dev.longi.enderrgb.ui.lights
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.skydoves.colorpickerview.ActionMode
+import com.skydoves.colorpickerview.listeners.ColorListener
 import dev.longi.enderrgb.R
 import kotlinx.android.synthetic.main.fragment_lights.*
+
 
 class LightsFragment : Fragment() {
 
@@ -35,7 +35,13 @@ class LightsFragment : Fragment() {
 
         buttonWhite.setOnClickListener { viewModel.setColor(255, 255, 255) }
         buttonOff.setOnClickListener { viewModel.off() }
-        buttonCustom.setOnClickListener { }
+        colorPicker.actionMode = ActionMode.LAST
+        colorPicker.setColorListener(ColorListener() { color: Int, fromUser: Boolean ->
+            if (fromUser) {
+                viewModel.setColor(color)
+            }
+        })
+        colorPicker.attachBrightnessSlider(brightnessSlide)
 
         viewModel.getEffects()
     }
