@@ -10,12 +10,14 @@
             android:title="OctoPi host" />
         <EditTextPreference
             android:defaultValue="8080"
+            android:inputType="number"
             android:key="pref_octopi_port"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="OctoPi port" />
         <EditTextPreference
             android:defaultValue="8090"
+            android:inputType="number"
             android:key="pref_enderrgb_port"
             android:selectAllOnFocus="true"
             android:singleLine="true"
