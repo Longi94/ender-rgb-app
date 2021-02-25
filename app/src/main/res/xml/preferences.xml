@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Connection">
+
+        <EditTextPreference
+            android:key="pref_octopi_host"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="OctoPi host" />
+        <EditTextPreference
+            android:defaultValue="8080"
+            android:key="pref_octopi_port"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="OctoPi port" />
+        <EditTextPreference
+            android:defaultValue="8090"
+            android:key="pref_enderrgb_port"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Ender RGB port" />
+    </PreferenceCategory>
+</PreferenceScreen>
