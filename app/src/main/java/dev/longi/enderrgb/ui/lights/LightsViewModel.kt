@@ -126,4 +126,24 @@ class LightsViewModel(app: Application) : AndroidViewModel(app) {
             Log.e(TAG, "setEffect: exception while making request", e)
         }
     }
+
+    fun stopEffect() {
+        try {
+            val request =
+                JsonObjectRequest(Request.Method.DELETE, url("light/effect"), null,
+                    { response ->
+                        Log.i(TAG, "stopEffect: Request successful: $response")
+                    },
+                    { error ->
+                        _error.value = error.message
+                        Log.e(TAG, "stopEffect: Failed to send request", error)
+                    }
+                )
+
+            VolleyQueue.getInstance(getApplication()).addToRequestQueue(request)
+        } catch (e: Exception) {
+            _error.value = e.message
+            Log.e(TAG, "stopEffect: exception while making request", e)
+        }
+    }
 }
